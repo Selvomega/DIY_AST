@@ -1,17 +1,12 @@
 from node_type import NodeType
 
 class Node:
-    
-    __head = ""
-    __content = ""
-    __child_array = []
-    __separator_between_childs = "\n__separator_between_childs\n"
 
     def __init__(self,head=NodeType.NORMAL,content=""):
         self.__head = head
         self.__content = content
-        if head != NodeType.NORMAL:
-            self.__content = head.value
+        self.__child_array = []
+        self.__separator_between_childs = "\n__separator_between_childs\n"
 
     def get_head(self):
         return self.__head
@@ -20,8 +15,10 @@ class Node:
         return self.__content
     
     def add_child(self,child_node):
-        length = len(self.__child_array)
-        self.__child_array[length] = child_node
+        self.__child_array.append(child_node)
+
+    def get_child_num(self):
+        return len(self.__child_array)
 
     def generate_current_data(self):
         ret = ""
@@ -29,3 +26,12 @@ class Node:
             ret = ret + item.get_content() + self.__separator_between_childs
         return ret
     
+    def display_current_node(self):
+        if self.__head == NodeType.NORMAL:
+            print("normal")
+        if self.__head == NodeType.FOR:
+            print("for")
+        print(self.__content)
+        print(len(self.__child_array))
+        for item in self.__child_array:
+            item.display_current_node()

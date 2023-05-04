@@ -1,10 +1,9 @@
-from text_processor import TextProcessor
+from syntax_tree import SyntaxTree
+from node_type import NodeType
 
-with open("block_test","r") as handle:
+with open("build_tree_test","r") as handle:
     data = handle.read()
 
-processor = TextProcessor(data)
-blocks = processor.DivideByBlock()
-for i in range(0,len(blocks)):
-    print(i)
-    print(blocks[i])
+tree = SyntaxTree()
+tree.build_tree(data)
+tree.print_tree()
